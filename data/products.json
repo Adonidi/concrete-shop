@@ -1,0 +1,102 @@
+[
+  {
+    "id": "p001",
+    "name": "Тротуарна плитка Модерн",
+    "category": "Тротуарна плитка",
+    "price": 620,
+    "unit": "м²",
+    "image": "images/products/p001.svg",
+    "description": "Лаконічна плитка для дворів, терас і пішохідних зон.",
+    "featured": true
+  },
+  {
+    "id": "p002",
+    "name": "Тротуарна плитка Старе місто",
+    "category": "Тротуарна плитка",
+    "price": 580,
+    "unit": "м²",
+    "image": "images/products/p002.svg",
+    "description": "Формат із виразною геометрією для класичного мощення.",
+    "featured": true
+  },
+  {
+    "id": "p003",
+    "name": "Бордюр садовий",
+    "category": "Бордюри",
+    "price": 145,
+    "unit": "шт.",
+    "image": "images/products/p003.svg",
+    "description": "Компактний бетонний бордюр для клумб, доріжок і газонів.",
+    "featured": false
+  },
+  {
+    "id": "p004",
+    "name": "Бордюр дорожній",
+    "category": "Бордюри",
+    "price": 290,
+    "unit": "шт.",
+    "image": "images/products/p004.svg",
+    "description": "Посилений бордюр для під'їздів, паркувань та проїздів.",
+    "featured": true
+  },
+  {
+    "id": "p005",
+    "name": "Блок декоративний Графіт",
+    "category": "Блоки",
+    "price": 96,
+    "unit": "шт.",
+    "image": "images/products/p005.svg",
+    "description": "Декоративний бетонний блок для парканів і малих форм.",
+    "featured": false
+  },
+  {
+    "id": "p006",
+    "name": "Блок фундаментний",
+    "category": "Блоки",
+    "price": 135,
+    "unit": "шт.",
+    "image": "images/products/p006.svg",
+    "description": "Міцний бетонний блок для господарських і будівельних робіт.",
+    "featured": false
+  },
+  {
+    "id": "p007",
+    "name": "Кашпо бетонне Куб",
+    "category": "Декор",
+    "price": 760,
+    "unit": "шт.",
+    "image": "images/products/p007.svg",
+    "description": "Мінімалістичне вуличне кашпо з фактурою натурального бетону.",
+    "featured": true
+  },
+  {
+    "id": "p008",
+    "name": "Лава бетонна Urban",
+    "category": "Декор",
+    "price": 2850,
+    "unit": "шт.",
+    "image": "images/products/p008.svg",
+    "description": "Масивна бетонна лава для приватних і громадських просторів.",
+    "featured": false
+  },
+  {
+    "id": "p009",
+    "name": "Сходинка бетонна Моноліт",
+    "category": "Сходи",
+    "price": 420,
+    "unit": "шт.",
+    "image": "images/products/p009.svg",
+    "description": "Бетонна сходинка для ґанків, терас і зовнішніх сходів.",
+    "featured": false
+  },
+  {
+    "id": "p010",
+    "name": "Стовпчик декоративний Loft",
+    "category": "Декор",
+    "price": 680,
+    "unit": "шт.",
+    "image": "images/products/p010.svg",
+    "description": "Лаконічний бетонний елемент для зонування та оформлення простору.",
+    "featured": false
+  }
+]

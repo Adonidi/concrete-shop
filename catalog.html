@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Каталог бренду ТВОРИВО: художні та декоративні вироби з бетону.">
+  <title>Каталог — ТВОРИВО</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand brand-image" href="index.html" aria-label="ТВОРИВО — Мистецтво у формі">
+        <img src="assets/img/logo-tvoryvo.png" alt="ТВОРИВО — Мистецтво у формі">
+      </a>
+      <nav class="nav">
+        <a href="index.html">Головна</a>
+        <a class="active" href="catalog.html">Каталог</a>
+        <a href="gallery.html">Галерея</a>
+        <a href="index.html#contacts">Контакти</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="catalog-hero">
+      <div class="container">
+        <div class="eyebrow">ТВОРИВО</div>
+        <h1>Каталог</h1>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:20px">
+      <div class="container">
+        <div class="catalog-tools">
+          <div class="search-wrap">
+            <span class="search-icon">⌕</span>
+            <input id="catalog-search" type="search" placeholder="Знайти товар…" autocomplete="off">
+          </div>
+          <div class="filters" id="category-filters"></div>
+        </div>
+        <div class="results-meta" id="results-meta"></div>
+        <div class="catalog-note">
+          <strong>Додатково:</strong> доставка фонтанів — 30 грн/км у дві сторони. Лакування вазонів і малої архітектури — 350–450 грн у два шари; фонтанів — 800–1 500 грн залежно від розміру.
+        </div>
+        <div class="cards" id="catalog-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand"><img src="assets/img/logo-tvoryvo.png" alt="ТВОРИВО"></div>
+      <span>© 2026 ТВОРИВО</span>
+    </div>
+  </footer>
+
+  <script src="data/products.js"></script>
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/catalog.js"></script>
+</body>
+</html>
