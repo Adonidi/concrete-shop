@@ -32,10 +32,6 @@ window.GALLERY_ITEMS = [
     "type": "image"
   },
   {
-    "src": "gallery/WhatsApp Image 2026-09-25 at 13.52.47.jpeg",
-    "type": "image"
-  },
-  {
     "src": "gallery/WhatsApp Image 2026-09-25 at 13.52.48.jpeg",
     "type": "image"
   },

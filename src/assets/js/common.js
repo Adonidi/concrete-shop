@@ -96,12 +96,13 @@ function closeProductModal() {
 
 function initProductCardModal() {
   ensureProductModal();
-  const productsById = new Map(getProducts().map(product => [product.id, product]));
+  if (document.documentElement.dataset.productModalBound === 'true') return;
+  document.documentElement.dataset.productModalBound = 'true';
 
   document.addEventListener('click', event => {
     const card = event.target.closest('.product-card[data-product-id]');
     if (!card) return;
-    const product = productsById.get(card.dataset.productId);
+    const product = getProducts().find(item => item.id === card.dataset.productId);
     if (product) openProductModal(product);
   });
 
@@ -110,7 +111,7 @@ function initProductCardModal() {
     const card = event.target.closest('.product-card[data-product-id]');
     if (!card) return;
     event.preventDefault();
-    const product = productsById.get(card.dataset.productId);
+    const product = getProducts().find(item => item.id === card.dataset.productId);
     if (product) openProductModal(product);
   });
 }

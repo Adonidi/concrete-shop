@@ -138,6 +138,9 @@ function moveGallery(step) {
 
 function bindGalleryModal() {
   const modal = ensureGalleryModal();
+  if (modal.dataset.bound === 'true') return;
+  modal.dataset.bound = 'true';
+
   modal.addEventListener('click', event => {
     if (event.target.closest('[data-gallery-close]')) closeGalleryModal();
     if (event.target.closest('[data-gallery-prev]')) moveGallery(-1);
@@ -175,23 +178,109 @@ async function initGalleryPage() {
   bindGalleryModal();
 }
 
+function readMediaAspect(item) {
+  return new Promise(resolve => {
+    if (item.type === 'video') {
+      const video = document.createElement('video');
+      const done = ratio => {
+        video.src = '';
+        resolve({ ...item, ratio: Number.isFinite(ratio) && ratio > 0 ? ratio : 1.33 });
+      };
+      video.preload = 'metadata';
+      video.muted = true;
+      video.onloadedmetadata = () => done(video.videoWidth / video.videoHeight);
+      video.onerror = () => done(1.33);
+      video.src = item.src;
+      return;
+    }
+
+    const image = new Image();
+    const done = ratio => resolve({ ...item, ratio: Number.isFinite(ratio) && ratio > 0 ? ratio : 1 });
+    image.onload = () => done(image.naturalWidth / image.naturalHeight);
+    image.onerror = () => done(1);
+    image.src = item.src;
+  });
+}
+
+function pickShapeAwarePreview(items) {
+  if (!items.length) return [];
+
+  const indexed = items.map((item, index) => ({ item, index }));
+  const used = new Set();
+  const takeEntry = entry => {
+    if (!entry || used.has(entry.index)) return null;
+    used.add(entry.index);
+    return entry.item;
+  };
+  const available = () => indexed.filter(entry => !used.has(entry.index));
+
+  // One clearly vertical image, then the two widest images.
+  const portrait = takeEntry([...indexed].sort((a, b) => a.item.ratio - b.item.ratio)[0]);
+  const widest = available().sort((a, b) => b.item.ratio - a.item.ratio);
+  const wideA = takeEntry(widest[0]);
+  const wideB = takeEntry(available().sort((a, b) => b.item.ratio - a.item.ratio)[0]);
+
+  // The right column gets images closest to square so the small tiles stay readable.
+  const small = available()
+    .sort((a, b) => Math.abs(Math.log(a.item.ratio || 1)) - Math.abs(Math.log(b.item.ratio || 1)))
+    .slice(0, 3)
+    .map(takeEntry)
+    .filter(Boolean);
+
+  return [portrait, wideA, wideB, ...small].filter(Boolean).slice(0, 6);
+}
+
+function galleryPreviewCard(item, index, slotClass) {
+  const label = item.type === 'video' ? 'Відкрити відео' : 'Відкрити фото';
+  const poster = item.poster ? ` poster="${escapeHtmlGallery(item.poster)}"` : '';
+  const media = item.type === 'video'
+    ? `<video src="${escapeHtmlGallery(item.src)}"${poster} muted playsinline preload="metadata" aria-hidden="true"></video><span class="gallery-play" aria-hidden="true">▶</span>`
+    : `<img src="${escapeHtmlGallery(item.src)}" alt="Виконана робота ${index + 1}" loading="lazy">`;
+
+  return `<button class="gallery-preview-item ${slotClass}" type="button" data-gallery-preview-index="${index}" aria-label="${label}">${media}</button>`;
+}
+
 async function initGalleryPreview() {
   const preview = document.querySelector('#gallery-preview');
   if (!preview) return;
-  const items = await readGalleryFolder();
+
+  const folderItems = await readGalleryFolder();
   const manifestItems = manifestGalleryItems();
   const manifestBySrc = new Map(manifestItems.map(item => [item.src, item]));
-  const source = items.length ? items.map(item => ({ ...item, ...(manifestBySrc.get(item.src) || {}) })) : manifestItems;
-  const selected = source.slice(0, 3);
-  preview.innerHTML = selected.map((item, index) => {
-    if (item.type === 'video') {
-      return `<a class="work gallery-preview-item" href="gallery.html" aria-label="Перейти до галереї"><video src="${escapeHtmlGallery(item.src)}" muted playsinline preload="metadata"></video><span class="gallery-play" aria-hidden="true">▶</span></a>`;
-    }
-    return `<a class="work gallery-preview-item" href="gallery.html" aria-label="Перейти до галереї"><img src="${escapeHtmlGallery(item.src)}" alt="Виконана робота ${index + 1}" loading="lazy"></a>`;
-  }).join('');
+  const source = folderItems.length
+    ? folderItems.map(item => ({ ...item, ...(manifestBySrc.get(item.src) || {}) }))
+    : manifestItems;
+
+  const measured = await Promise.all(source.slice(0, 30).map(readMediaAspect));
+  const selected = pickShapeAwarePreview(measured);
+  const slots = [
+    'preview-slot--tall',
+    'preview-slot--wide-a',
+    'preview-slot--wide-b',
+    'preview-slot--small-a',
+    'preview-slot--small-b',
+    'preview-slot--small-c'
+  ];
+
+  galleryItems = selected;
+  preview.classList.add('works-grid--smart');
+  preview.innerHTML = selected.length
+    ? selected.map((item, index) => galleryPreviewCard(item, index, slots[index] || '')).join('')
+    : '<div class="empty" style="grid-column:1/-1">Галерея поки порожня.</div>';
+
+  preview.addEventListener('click', event => {
+    const card = event.target.closest('[data-gallery-preview-index]');
+    if (!card) return;
+    openGalleryModal(Number(card.dataset.galleryPreviewIndex));
+  });
+
+  bindGalleryModal();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function initGalleryViews() {
   initGalleryPage();
   initGalleryPreview();
-});
+}
+
+document.addEventListener('DOMContentLoaded', initGalleryViews);
+document.addEventListener('tvoryvo:navigate', initGalleryViews);
