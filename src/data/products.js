@@ -502,5 +502,29 @@ window.PRODUCTS = [
     "image": "images/products/product-066.jpeg",
     "details": "Ціна: 800 грн",
     "featured": false
+  },
+  {
+    "id": "p067",
+    "name": "Попільничка (штучний камінь)",
+    "category": "Арт-бетон",
+    "image": "images/products/product-067.jpeg",
+    "details": "Ціна: 300 грн",
+    "featured": false
+  },
+  {
+    "id": "p068",
+    "name": "Урна",
+    "category": "Арт-бетон",
+    "image": "images/products/product-068.jpeg",
+    "details": "Ціна: 800 грн",
+    "featured": false
+  },
+  {
+    "id": "p069",
+    "name": "Гном Малий",
+    "category": "Арт-бетон",
+    "image": "images/products/product-069.jpeg",
+    "details": "Ціна: 1200 грн",
+    "featured": false
   }
 ];

@@ -646,3 +646,100 @@ main { transition: opacity .12s ease; }
 @media (max-width: 680px) {
   .section--contacts { scroll-margin-top: 120px; }
 }
+
+
+/* Contact channels: phone + Instagram */
+.contact-link {
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+.contact-icon {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  display: inline-grid;
+  place-items: center;
+}
+.contact-icon svg { width: 100%; height: 100%; display: block; }
+.contact-link__copy,
+.contacts-channel__copy {
+  display: grid;
+  gap: 1px;
+  min-width: 0;
+}
+.contact-link__copy > span,
+.contacts-channel__copy > span {
+  font-size: 13px;
+  font-weight: 650;
+  opacity: .78;
+}
+.contact-link__copy strong,
+.contacts-channel__copy strong {
+  font-size: 16px;
+  line-height: 1.2;
+}
+.contacts-methods {
+  display: grid;
+  gap: 12px;
+  min-width: 315px;
+}
+.contacts-channel {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 17px 20px;
+  border-radius: 18px;
+  color: white;
+  transition: background .18s ease, transform .18s ease;
+}
+.contacts-channel--phone { background: var(--accent); }
+.contacts-channel--phone:hover { background: var(--accent-dark); transform: translateY(-1px); }
+.contacts-channel--instagram { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.14); }
+.contacts-channel--instagram:hover { background: rgba(255,255,255,.2); transform: translateY(-1px); }
+@media (max-width: 680px) {
+  .contacts-methods { min-width: 0; width: 100%; }
+  .contacts-channel { width: 100%; }
+  .contact-panel--compact .contact-links a { text-align: left; }
+}
+
+
+/* Unified contact block styles */
+.contacts-page {
+  min-height: 0;
+  display: block;
+  padding-top: 34px;
+  padding-bottom: 46px;
+}
+.contacts-page-panel {
+  background: var(--accent);
+  color: white;
+}
+.contacts-title--compact {
+  margin: 2px 0 6px;
+  font-size: clamp(28px, 3.5vw, 42px);
+  line-height: 1.05;
+  letter-spacing: -.035em;
+}
+.contacts-copy--light {
+  margin: 0;
+  color: rgba(255,255,255,.78);
+}
+.contacts-page-panel .contact-links {
+  min-width: 0;
+}
+.contacts-page-panel .contact-link {
+  padding: 13px 18px;
+  white-space: nowrap;
+  border-radius: 16px;
+  background: rgba(255,255,255,.12);
+  color: white;
+}
+.contacts-page-panel .contact-link:hover {
+  background: rgba(255,255,255,.20);
+}
+@media (max-width: 680px) {
+  .contacts-page { padding-top: 24px; padding-bottom: 36px; }
+  .contacts-page-panel .contact-link { white-space: normal; }
+}
