@@ -526,5 +526,21 @@ window.PRODUCTS = [
     "image": "images/products/product-069.jpeg",
     "details": "Ціна: 1200 грн",
     "featured": false
+  },
+  {
+    "id": "p070",
+    "name": "Вовк",
+    "category": "Арт-бетон",
+    "image": "images/products/product-070.jpeg",
+    "details": "Висота: 65см, ширина: 34см, глибина: 55см\nЦіна: 5000 грн",
+    "featured": false
+  },
+  {
+    "id": "p071",
+    "name": "Йорк",
+    "category": "Арт-бетон",
+    "image": "images/products/product-071.jpeg",
+    "details": "Ціна: 1100 грн",
+    "featured": false
   }
 ];
